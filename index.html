@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOB LYRICS</title>
+  <link rel="icon" href="icon.jpg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* General Styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, red, #00008b, #2f4f4f, #6a0dad, #1f1f2e);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 15px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.0);
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      animation: typing 6s steps(30, end) infinite alternate;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid white;
+      width: 22ch;
+      margin-right: 20px;
+    }
+    @keyframes typing {
+      0%, 50% { width: 50ch; }
+      100% { width: 0; }
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 30px;
+      color: Red;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 200;
+    }
+    .menu-toggle div {
+      width: 30px;
+      height: 4px;
+      margin: 6px 0;
+      background-color: white;
+      border-radius: 3px;
+    }
+    .menu {
+      display: text;
+      position: fixed;
+      top: 50px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 10px;
+      border-radius: 8px;
+      flex-direction: column;
+      z-index: 101;
+    }
+    .menu a {
+      padding: 10px 15px;
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .menu a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .content {
+      margin-top: 100px;
+      padding: 20px;
+      text-align: center;
+    }
+    .box {
+      margin: 15px auto;
+      padding: 20px;
+      max-width: 390px;
+      background: rgba(220, 220, 255, 0.1);
+      color: white;
+      text-align: center;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    .b {
+      display: inline-block;
+      margin: 6px;
+      padding: 10px 25px;
+      font-size: 1.1em;
+      text-decoration: none;
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+    }
+    .b:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 9px;
+      background: rgba(0, 0, 0, 0.3);
+      text-align: center;
+      color: white;
+    }
+    .social-links a {
+      margin: 0 10px;
+      font-size: 18px;
+      color: white;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .social-links a:hover {
+      opacity: 1;
+    }
+    .imgs {
+      border-radius: 15px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    .youtube {
+      border-radius: 12px;
+    }
+    .telegram {
+      border-radius: 20px;
+    }
+    /* Search form styles */
+    form {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 1s;
+      width: 50px;
+      height: 50px;
+      background: white;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 4px solid white;
+      padding: 5px;
+      z-index: 50;
+    }
+    input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 42.5px;
+      line-height: 30px;
+      outline: 0;
+      border: 0;
+      font-size: 1em;
+      border-radius: 20px;
+      padding: 0 20px;
+    }
+    .fa {
+      box-sizing: border-box;
+      padding: 10px;
+      width: 42.5px;
+      height: 42.5px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      border-radius: 4px;
+      color: #07051a;
+      text-align: center;
+      font-size: 1.2em;
+      transition: all 1s;
+    }
+    form:focus-within,
+    form:hover,
+    form:valid {
+      width: 200px;
+      cursor: pointer;
+    }
+    form:hover input,
+    form:focus-within input,
+    form:valid input {
+      width: 100%;
+    }
+    form:hover .fa,
+    form:focus-within .fa,
+    form:valid .fa {
+      background: blue;
+      color: grey;
+    }
+    .bttn {
+      display: none;
+      position: absolute;
+      top: 10px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-size: 20px;
+      color: grey;
+      padding: 4px;
+      min-height: max-content;
+      background: transparent;
+      outline: 0;
+      border: 1px solid #303030;
+      border-radius: 4px;
+      text-align: center;
+      width: 100%;
+      cursor: pointer;
+    }
+    form:valid bttn {
+      display: block;
+    }
+    /* Style for Search Results Container */
+    #searchResults {
+      margin-top: 100px;
+      padding: 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.8);
+    }
+  </style>
+  <script>
+    // Toggle menu
+    function toggleMenu() {
+      const menu = document.querySelector('.menu');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+    
+    // Show a specific section and hide any search results
+    function showSection(sectionId) {
+      const searchResults = document.getElementById("searchResults");
+      if (searchResults) {
+        searchResults.style.display = "none";
+        searchResults.innerHTML = "";
+      }
+      const sections = document.querySelectorAll('.content');
+      sections.forEach(section => {
+        section.style.display = section.id === sectionId ? 'block' : 'none';
+      });
+      toggleMenu(); // hide menu after selection
+    }
+    
+    // SEARCH FUNCTION: Finds matching boxes and displays them in a container at the top
+    function searchContent() {
+      let input = document.getElementById("searchInput").value.toLowerCase();
+      const sections = document.querySelectorAll('.content');
+      
+      // Create (or reuse) a search results container at the top
+      let resultsContainer = document.getElementById("searchResults");
+      if (!resultsContainer) {
+        resultsContainer = document.createElement("div");
+        resultsContainer.id = "searchResults";
+        document.body.insertBefore(resultsContainer, document.body.firstChild);
+      }
+      resultsContainer.innerHTML = ""; // clear any previous results
+      
+      let noResult = true;
+      
+      // Search through each section’s boxes
+      sections.forEach(section => {
+        const boxes = section.querySelectorAll('.box');
+        boxes.forEach(box => {
+          if (box.innerText.toLowerCase().includes(input) && input !== "") {
+            // Clone the matching box and add it to the results container
+            const clone = box.cloneNode(true);
+            resultsContainer.appendChild(clone);
+            noResult = false;
+          }
+        });
+      });
+      
+      if (noResult && input !== "") {
+        resultsContainer.innerHTML = "<p style='color:white;font-weight:bold;margin-top:20px;'>No results found.</p>";
+      }
+      
+      // Hide original sections when showing search results
+      sections.forEach(section => section.style.display = "none");
+      
+      // Show the search results container and scroll to the top
+      resultsContainer.style.display = "block";
+      window.scrollTo(0, 0);
+    }
+    
+    // CLEAR SEARCH FUNCTION: Resets the search and restores the default view
+    function clearSearch() {
+      document.getElementById("searchInput").value = "";
+      const resultsContainer = document.getElementById("searchResults");
+      if (resultsContainer) {
+        resultsContainer.style.display = "none";
+        resultsContainer.innerHTML = "";
+      }
+      // Show the default section (e.g., dashboard)
+      showSection('dashboard');
+    }
+    
+    // Initialize – show dashboard by default and enable the menu toggle button
+    document.addEventListener('DOMContentLoaded', () => {
+      showSection('dashboard');
+      document.querySelector('.menu-toggle').style.display = 'block';
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </button>
+    <div class="logo">MOB VIDEOS TRNSLTD></div>
+  </header>
+  <div class="menu">
+    <a href="#dashboard" onclick="showSection('dashboard')">Dashboard</a>
+    <a href="#information" onclick="showSection('information')">🎥MOVIE UPDATES🎬</a>
+  </div>
+  <!-- Dashboard Section -->
+  <div id="dashboard" class="content">
+    <div>
+      <form onsubmit="searchContent(); return false;">
+        <input type="search" id="searchInput" placeholder="Search here..." required>
+        <button type="submit"><i class="fa fa-search"></i></button>
+        <button type="button" class="bttn" onclick="clearSearch()">Clear</button>
+      </form>
+    </div>
+    <p>
+      <img class="imgs" src="imgs/icon.jpg" alt="" width="200" height="200" />
+    </p>
+    <h1>🎊Stay connected with us✨️</h1>
+    <div class="box">
+      <p>WhatsApp Me</p>
+      <a class="b" href="https://wa.me/256762822677?text=how+a+u+bro">Contact me for more info</a>
+    </div>
+    <div class="box">
+      <p>Telegram channel</p>
+      <a class="b" href="https://t.me/mobvideoslibrary">Join Telegram channel</a>
+    </div>
+    <div class="box">
+      <p>YouTube channel</p>
+      <a class="b" href="https://www.youtube.com/@Moblyrics256">Subscribe our YouTube channel</a>
+    </div>
+    <div class="box">
+      <p>WhatsApp group</p>
+      <a class="b" href="">Join group</a>
+    </div>
+    <div class="box">
+      <p>Contact developer</p>
+      <a class="b" href="https://wa.me/256708558509?text=Hello+bro+👋+i'm+from+your+website...">Start chatting</a>
+    </div>
+    <h4>Created by 𝕶𝖍𝖆𝖑𝖎𝖉 𝖐𝖎 𝖕𝖗𝖔✍</h4>
+  </div>
+  <!-- Movie Updates Section -->
+  <div id="information" class="content" style="display: none;">
+    <p>
+      <img class="imgs" src="imgs/icon.jpg" alt="" width="100" height="100" />
+    </p>
+    <h1>🎥MOVIE UPDATES🎬</h1>
+    <div class="box">
+      <p>
+        <img class="imgs" src="imgs/Upgraded.jpg" alt="" width="250" height="250" />
+      </p>
+      <p>
+        Movie name: Upgraded <br>#Comedy #Romance #VJ_Junior
+      </p>
+      <p>
+       When she's upgraded to first class on a work trip, she meets handsome Will (Archie Renaux), who mistakes Ana for her boss--a white lie that sets off a glamorous chain of events, romance and opportunity, until her fib threatens to surface.
+      </p>
+      <h2>TRAILOR <br>⬇️</h2>
+      <a href=""><img class="youtube" src="imgs/youtube.jpg" alt="" width="125" height="50" /></a>
+      <h2>Download full movie <br> ⬇️</h2>
+      <a href=""><img class="telegram" src="imgs/telegram.jpg" alt="" width="180" height="70" /></a>
+    </div>
+     
+     <div class="box">
+        <p> <img class="imgs" src="imgs/Upgraded.jpg" alt="" width="250" height="250"/>
+       </p>
+        <p>Movie name: Blades of fury <br>
+            #Comedy #Romance #VJ_Junior</p>
+         <p>When she's upgraded to first class on a work trip, she meets handsome Will (Archie Renaux), who mistakes Ana for her boss--a white lie that sets off a glamorous chain of events, romance and opportunity, until her fib threatens to surface.</p>
+     
+       <h2>TRAILOR <br>⬇️</h2>
+       <a href=""><img class="youtube" src="imgs/youtube.jpg" alt="" width="125" height="50"/></a>
+        
+    <h2>Download full movie <br> ⬇️</h2>
+         <a href=""><img class="telegram" src="imgs/telegram.jpg" alt="" width="180" height="70"/></a>
+     </div>
+     
+     <div class="box">
+        <p> <img class="imgs" src="imgs/Upgraded.jpg" alt="" width="250" height="250"/>
+       </p>
+        <p>Movie name: Fist of legend <br>
+            #Comedy #Romance #VJ_Junior</p>
+         <p>When she's upgraded to first class on a work trip, she meets handsome Will (Archie Renaux), who mistakes Ana for her boss--a white lie that sets off a glamorous chain of events, romance and opportunity, until her fib threatens to surface.</p>
+     
+       <h2>TRAILOR <br>⬇️</h2>
+       <a href=""><img class="youtube" src="imgs/youtube.jpg" alt="" width="125" height="50"/></a>
+        
+    <h2>Download full movie <br> ⬇️</h2>
+         <a href=""><img class="telegram" src="imgs/telegram.jpg" alt="" width="180" height="70"/></a>
+     </div>
+     
+     <div class="box">
+        <p> <img class="imgs" src="imgs/Upgraded.jpg" alt="" width="250" height="250"/>
+       </p>
+        <p>Movie name: Drug Hunder <br>
+            #Comedy #Romance #VJ_Junior</p>
+         <p>When she's upgraded to first class on a work trip, she meets handsome Will (Archie Renaux), who mistakes Ana for her boss--a white lie that sets off a glamorous chain of events, romance and opportunity, until her fib threatens to surface.</p>
+     
+       <h2>TRAILOR <br>⬇️</h2>
+       <a href=""><img class="youtube" src="imgs/youtube.jpg" alt="" width="125" height="50"/></a>
+        
+    <h2>Download full movie <br> ⬇️</h2>
+         <a href=""><img class="telegram" src="imgs/telegram.jpg" alt="" width="180" height="70"/></a>
+     </div>
+     
+    <div class="box">
+        <p> <img class="imgs" src="imgs/Upgraded.jpg" alt="" width="250" height="250"/>
+       </p>
+        <p>Movie name: Prosecutor <br>
+            #Comedy #Romance #VJ_Junior</p>
+         <p>When she's upgraded to first class on a work trip, she meets handsome Will (Archie Renaux), who mistakes Ana for her boss--a white lie that sets off a glamorous chain of events, romance and opportunity, until her fib threatens to surface.</p>
+     
+       <h2>TRAILOR <br>⬇️</h2>
+       <a href=""><img class="youtube" src="imgs/youtube.jpg" alt="" width="125" height="50"/></a>
+        
+    <h2>Download full movie <br> ⬇️</h2>
+         <a href=""><img class="telegram" src="imgs/telegram.jpg" alt="" width="180" height="70"/></a>
+     </div>
+        
+    <!-- Additional movie boxes … -->
+    <h4>Created by 𝕶𝖍𝖆𝖑𝖎𝖉 𝖐𝖎 𝖕𝖗𝖔✍</h4>
+  </div>
+  <footer>
+    <div class="social-links">
+      <a href="https://t.me/mobvideoslibrary" class="fab fa-telegram"></a>
+      <a href="https://wa.me/256762822677?text=how+a+u+bro" class="fab fa-whatsapp"></a>
+      <a href="https://www.youtube.com/@Moblyrics256" class="fab fa-youtube"></a>
+    </div>
+    <p>&copy; 2025/2026 mob videos &copy;</p>
+  </footer>
+</body>
+</html>
